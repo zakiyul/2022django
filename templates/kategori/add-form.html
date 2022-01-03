@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} kategori add form {% endblock title %}
+{% block content %} 
+<div class="container">
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nama" class="form-label">Nama</label>
+      <input type="text" name="nama" id="nama" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">add kategori</button>
+  </form>
+</div>
+{% endblock content %}
