@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} product add form {% endblock title %}
+{% block content %} 
+<div class="container">
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="nama" class="form-label">Nama</label>
+      <input type="text" name="nama" id="nama" class="form-control" value="{{product.nama}}">
+    </div>
+    <div class="mb-3">
+      <label for="harga" class="form-label">Harga</label>
+      <input type="number" name="harga" id="harga" class="form-control" value="{{product.harga}}">
+    </div>
+    <div class="mb-3">
+      <label for="berat" class="form-label">Berat</label>
+      <input type="number" name="berat" id="berat" class="form-control" value="{{product.berat}}">
+    </div>
+    <div class="mb-3">
+      <label for="stok" class="form-label">Stok</label>
+      <input type="number" name="stok" id="stok" class="form-control" value="{{product.stok}}">
+    </div>
+    <div class="mb-3">
+      <label for="kategori" class="form-label">Kategori</label>
+      <select name="kategori" id="kategori" class="form-control" multiple>
+        {% for kategori in kategories %}
+          {% if kategori.id in productKategori %}
+            <option value="{{kategori.id}}" selected>{{kategori.nama}}</option>
+          {% else %}
+            <option value="{{kategori.id}}">{{kategori.nama}}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="gambar" class="form-label">Gambar</label>
+      <input type="file" name="gambar" id="gambar" class="form-control">
+      <small>gambar saat ini: <a href="{{product.gambar.url}}">{{product.gambar}}</a> </small>
+    </div>
+    <div class="mb-3">
+      <label for="deskripsi" class="form-label">Deskrpisi</label>
+      <textarea name="deskripsi" id="deskripsi" class="form-control">{{product.deskripsi}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-success">update product</button>
+  </form>
+</div>
+<script>
+  window.onmousedown = function (e) {
+    var el = e.target;
+    if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+        e.preventDefault();
+
+        // toggle selection
+        if (el.hasAttribute('selected')) el.removeAttribute('selected');
+        else el.setAttribute('selected', '');
+
+        // hack to correct buggy behavior
+        var select = el.parentNode.cloneNode(true);
+        el.parentNode.parentNode.replaceChild(select, el.parentNode);
+    }
+}
+
+</script>
+{% endblock content %}

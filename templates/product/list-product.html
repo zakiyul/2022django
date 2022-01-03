@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} List Kategori {% endblock title %}
+{% block content %} 
+<div class="container">
+  <div class="d-flex">
+    <a href="add/" class="btn btn-primary mb-3">add</a>
+  </div>
+  <ul class="list-group">
+    {% for product in products %}
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <a href="{{product.id}}" class="">{{product.nama}}</a>
+      <div class="d-flex">
+        <a href="edit/{{product.id}}" class="btn btn-success">edit</a>
+        <form action="" method="post" class="ms-3">
+          {% csrf_token %}
+          <input type="hidden" name="product_id" value="{{product.id}}">
+          <button type="submit" class="btn btn-danger">delete</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

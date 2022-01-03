@@ -13,5 +13,8 @@ urlpatterns = [
     path('kategori/edit/<int:id>/', views.editKategori),
     path('toko/', views.listToko),
     path('toko/add/', views.addToko),
-    path('toko/edit/<int:id>/', views.editToko)
+    path('toko/edit/<int:id>/', views.editToko),
+    path('product/', views.listProduct),
+    path('product/add/', views.addProduct),
+    path('product/edit/<int:id>/', views.editProduct)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
